@@ -14,7 +14,7 @@ BASE_URL = "https://quotes.toscrape.com/"
 class Quote:
     text: str
     author: str
-    tags: list[str]
+    tags: List[str]
 
 
 TITLE_FIELDS = [field.name for field in fields(Quote)]
@@ -33,7 +33,7 @@ def get_quotes(page_soup: Tag) -> List[Quote]:
     return [get_single_quote(quote) for quote in list_of_quotes]
 
 
-def get_pagination_page(url=BASE_URL, all_quotes=None):
+def get_pagination_page(url=BASE_URL, all_quotes=None) -> List[Quote]:
     if all_quotes is None:
         all_quotes = []
     response = requests.get(url)
@@ -50,7 +50,7 @@ def get_pagination_page(url=BASE_URL, all_quotes=None):
     return all_quotes
 
 
-def main(output_csv_path: str, quotes: [Quote]) -> None:
+def main(output_csv_path: str, quotes: List[Quote]) -> None:
     with open(output_csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(TITLE_FIELDS)
