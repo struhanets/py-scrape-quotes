@@ -33,7 +33,10 @@ def get_quotes(page_soup: Tag) -> List[Quote]:
     return [get_single_quote(quote) for quote in list_of_quotes]
 
 
-def get_pagination_page(url=BASE_URL, all_quotes=None) -> List[Quote]:
+def get_pagination_page(
+        url: str = BASE_URL,
+        all_quotes: list = None
+) -> List[Quote]:
     if all_quotes is None:
         all_quotes = []
     response = requests.get(url)
