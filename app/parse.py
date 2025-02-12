@@ -1,5 +1,4 @@
 import csv
-import json
 from dataclasses import dataclass, fields
 from typing import List
 from urllib.parse import urljoin
