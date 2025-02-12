@@ -53,7 +53,8 @@ def get_pagination_page(
     return all_quotes
 
 
-def main(output_csv_path: str, quotes: List[Quote]) -> None:
+def main(output_csv_path: str) -> None:
+    quotes = get_pagination_page(BASE_URL)
     with open(output_csv_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(TITLE_FIELDS)
@@ -61,10 +62,10 @@ def main(output_csv_path: str, quotes: List[Quote]) -> None:
             [
                 quote.text,
                 quote.author,
-                json.dumps(quote.tags, ensure_ascii=False)
+                str(quote.tags)
             ] for quote in quotes
         )
 
 
 if __name__ == "__main__":
-    main("quotes.csv", get_pagination_page(BASE_URL))
+    main("quotes.csv")
